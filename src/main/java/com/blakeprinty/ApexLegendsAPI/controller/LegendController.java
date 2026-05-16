@@ -39,7 +39,7 @@ public class LegendController {
     @PostMapping
     public Legend create(@RequestBody Legend legend) { return service.saveLegend(legend); }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.deleteLegend(id);
         return ResponseEntity.noContent().build();
