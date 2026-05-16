@@ -27,6 +27,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(org.springframework.http.HttpMethod.OPTIONS, "/**").permitAll()  // add this line
                         .requestMatchers("/admin.html", "/admin/**").authenticated()
                         .requestMatchers("/api/legends").permitAll()
                         .requestMatchers("/api/legends/**").permitAll()
