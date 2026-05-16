@@ -1,10 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Admin Login</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .login-box {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 40px;
+            width: 360px;
+            text-align: center;
+        }
+        h1 { color: #c8102e; margin-bottom: 8px; font-size: 1.6rem; }
+        p { color: #888; margin-bottom: 24px; font-size: 0.9rem; }
+        .error { color: #c8102e; margin-bottom: 16px; font-size: 0.9rem; }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 16px;
+            background: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1rem;
+        }
+        input:focus { outline: none; border-color: #c8102e; }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #c8102e;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        button:hover { background: #a00d24; }
+    </style>
 </head>
 <body>
-$END$
+<div class="login-box">
+    <h1>APEX ADMIN</h1>
+    <p>Sign in to manage legends</p>
+    <div class="error" id="errorMsg" style="display:none">Invalid username or password.</div>
+    <form action="/perform_login" method="post">
+        <input type="text" name="username" placeholder="Username" required />
+        <input type="password" name="password" placeholder="Password" required />
+        <button type="submit">Sign In</button>
+    </form>
+</div>
+<script>
+    if (window.location.search.includes('error=true')) {
+        document.getElementById('errorMsg').style.display = 'block';
+    }
+</script>
 </body>
 </html>
