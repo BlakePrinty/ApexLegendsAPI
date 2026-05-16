@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -27,12 +28,15 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/admin.html", "/admin/**").authenticated()
-                        .requestMatchers("/api/legends").permitAll()          // public GET all
-                        .requestMatchers("/api/legends/**").permitAll()       // public GET by id/name/class
+                        .requestMatchers("/api/legends").permitAll()
+                        .requestMatchers("/api/legends/**").permitAll()
                         .requestMatchers(org.springframework.http.HttpMethod.POST, "/api/legends").authenticated()
                         .requestMatchers(org.springframework.http.HttpMethod.PUT, "/api/legends/**").authenticated()
                         .requestMatchers(org.springframework.http.HttpMethod.DELETE, "/api/legends/**").authenticated()
                         .anyRequest().permitAll()
+                )
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                 )
                 .formLogin(form -> form
                         .loginPage("/login.html")
@@ -46,7 +50,7 @@ public class SecurityConfig {
                         .logoutSuccessUrl("/login.html")
                         .permitAll()
                 )
-                .csrf(csrf -> csrf.disable()); // disable for REST API simplicity
+                .csrf(csrf -> csrf.disable());
         return http.build();
     }
 
