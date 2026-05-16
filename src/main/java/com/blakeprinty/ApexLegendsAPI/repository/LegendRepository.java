@@ -8,5 +8,5 @@ import java.util.Optional;
 
 public interface LegendRepository extends JpaRepository<Legend, Long> {
     Optional<Legend> findByNameIgnoreCase(String name);
-    List<Legend> findByRole(String role);
+    List<Legend> findByLegendClass(String legendClass);
 }

@@ -14,9 +14,19 @@ public class Legend {
     private Long id;
 
     private String name;
-    private String role;
-    private String description;
-    private String passiveAbility;
-    private String tacticalAbility;
-    private String ultimateAbility;
+    private String realName;
+    private int age;
+    private String homeWorld;
+    private String legendClass;
+
+    private String tacticalName;
+    private String tacticalDescription;
+
+    private String passiveName;
+    private String passiveDescription;
+
+    private String ultimateName;
+    private String ultimateDescription;
+
+    private String imagePath;
 }

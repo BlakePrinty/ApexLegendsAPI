@@ -12,40 +12,36 @@ import java.util.List;
 @RequestMapping("/api/legends")
 public class LegendController {
     @Autowired
-    private LegendService legendService;
+    private LegendService service;
 
     @GetMapping
-    public List<Legend> getAll() {
-        return legendService.getAllLegends();
-    }
+    public List<Legend> getAll() { return service.getAllLegends(); }
 
     @GetMapping("/{id}")
     public ResponseEntity<Legend> getById(@PathVariable Long id) {
-        return legendService.getLegendById(id)
+        return service.getLegendById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/name/{name}")
     public ResponseEntity<Legend> getByName(@PathVariable String name) {
-        return legendService.getLegendByName(name)
+        return service.getLegendByName(name)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/role/{role}")
-    public List<Legend> getByRole(@PathVariable String role) {
-        return legendService.getLegendsByRole(role);
+    @GetMapping("/class/{legendClass}")
+    public List<Legend> getByClass(@PathVariable String legendClass) {
+        return service.getLegendsByClass(legendClass);
     }
 
     @PostMapping
-    public Legend create(@RequestBody Legend legend) {
-        return legendService.saveLegend(legend);
-    }
+    public Legend create(@RequestBody Legend legend) { return service.saveLegend(legend); }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
-        legendService.deleteLegend(id);
+        service.deleteLegend(id);
         return ResponseEntity.noContent().build();
     }
 }
