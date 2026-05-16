@@ -44,4 +44,23 @@ public class LegendController {
         service.deleteLegend(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Legend> update(@PathVariable Long id, @RequestBody Legend updated) {
+        return service.getLegendById(id).map(existing -> {
+            existing.setName(updated.getName());
+            existing.setRealName(updated.getRealName());
+            existing.setAge(updated.getAge());
+            existing.setHomeWorld(updated.getHomeWorld());
+            existing.setLegendClass(updated.getLegendClass());
+            existing.setTacticalName(updated.getTacticalName());
+            existing.setTacticalDescription(updated.getTacticalDescription());
+            existing.setPassiveName(updated.getPassiveName());
+            existing.setPassiveDescription(updated.getPassiveDescription());
+            existing.setUltimateName(updated.getUltimateName());
+            existing.setUltimateDescription(updated.getUltimateDescription());
+            existing.setImagePath(updated.getImagePath());
+            return ResponseEntity.ok(service.saveLegend(existing));
+        }).orElse(ResponseEntity.notFound().build());
+    }
 }
